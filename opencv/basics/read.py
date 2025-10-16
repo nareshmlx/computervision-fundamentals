@@ -1,23 +1,34 @@
-import cv2 as cv 
+"""
+read.py
+----------------
+Simple examples for reading images and videos with OpenCV.
 
-# img  = cv.imread('../photos//astinMartin.jpeg')
+The video loop shows how to read frames from a file and display them. The
+loop includes a safe check for end-of-stream which avoids trying to display
+`None` frames when the file finishes.
+"""
 
-# cv.imshow('Astin Martin', img)
+import cv2 as cv
 
-# cv.waitKey(0) # 0 means wait indefinitely until a key is pressed
+# Example: read and display a single image
+# img  = cv.imread('../photos/astinMartin.jpeg')
+# if img is not None:
+#     cv.imshow('Astin Martin', img)
+#     cv.waitKey(0)
 
 ## Reading a video file
-capture = cv.VideoCapture('../videos/car.mp4')
+capture = cv.VideoCapture("../videos/car.mp4")
 
 while True:
-    isTrue, frame = capture.read() 
-    
-    cv.imshow('Video', frame)
-    
-    if cv.waitKey(20) & 0xFF == ord('q'):
+    isTrue, frame = capture.read()
+    if not isTrue or frame is None:
+        # reached end of file or failed to read the frame
         break
 
-capture.release()   
+    cv.imshow("Video", frame)
+
+    if cv.waitKey(20) & 0xFF == ord("q"):
+        break
+
+capture.release()
 cv.destroyAllWindows()
-
-

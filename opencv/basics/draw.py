@@ -1,11 +1,19 @@
-import cv2 as cv 
+"""
+draw.py
+----------------
+Examples of drawing primitives in OpenCV: lines, rectangles, circles and text.
+
+This file shows how to draw shapes onto an image (useful for annotations,
+visual debugging and simple graphics overlays). Window titles are descriptive
+so you can run the script and inspect each result.
+"""
+
+import cv2 as cv
 import numpy as np
-import matplotlib.pyplot as plt
 
-blank = np.zeros((500,500,3), 
-                 dtype='uint8')
+blank = np.zeros((500, 500, 3), dtype="uint8")
 
-cv.imshow('Blank', blank)
+cv.imshow("Blank", blank)
 
 # # 1. Paint the image a certain color
 
@@ -29,17 +37,20 @@ cv.imshow('Blank', blank)
 
 # 4. Draw a Line
 
-cv.line(blank,(250,0),(blank.shape[1]//2,blank.shape[0]//2),color=(0,255,0),thickness=5)
-cv.imshow('Line',blank)
+cv.line(
+    blank,
+    (250, 0),
+    (blank.shape[1] // 2, blank.shape[0] // 2),
+    color=(0, 255, 0),
+    thickness=5,
+)
+cv.imshow("Line", blank)
 
 # 5. Put a Text
 
-cv.putText(blank,'Hello Nigga!',(255,255),cv.FONT_HERSHEY_TRIPLEX,
-           1.0,
-           (255,0,255),
-            1)
-cv.imshow("Text Image",blank)
+cv.putText(
+    blank, "Hello, OpenCV!", (255, 255), cv.FONT_HERSHEY_TRIPLEX, 1.0, (255, 0, 255), 1
+)
+cv.imshow("Text Image", blank)
 
 cv.waitKey(0)
-
-
